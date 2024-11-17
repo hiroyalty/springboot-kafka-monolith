@@ -1,5 +1,7 @@
 package com.hiroyalty.kafka.rest;
 
+import com.hiroyalty.kafka.payload.Customer;
+import com.hiroyalty.kafka.producer.KafkaJsonProducer;
 import com.hiroyalty.kafka.producer.KafkaProducer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class MessageController {
 
     private final KafkaProducer kafkaProducer;
+    private final KafkaJsonProducer kafkaJsonProducer;
 
     @PostMapping
     public ResponseEntity<String> publishMessage(
@@ -21,5 +24,13 @@ public class MessageController {
     ) {
         kafkaProducer.publishMessage(message);
         return ResponseEntity.ok("Message queued successfully!");
+    }
+
+    @PostMapping("/json")
+    public ResponseEntity<String> publishJsonMessage(
+            @RequestBody Customer message
+    ) {
+        kafkaJsonProducer.publishMessage(message);
+        return ResponseEntity.ok("Message queued successfully as JSON!");
     }
 }
