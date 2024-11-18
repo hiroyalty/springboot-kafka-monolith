@@ -1,4 +1,4 @@
-package com.halitesolutions.wikimedia.producer.config;
+package com.halitesolutions.wikimedia.consumer.config;
 
 import org.apache.kafka.clients.admin.NewTopic;
 import org.springframework.context.annotation.Bean;
